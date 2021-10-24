@@ -1,14 +1,9 @@
-FROM golang:latest as builder
+FROM golang:1.17.2-alpine
 
-ENV CGO_ENABLED=0
-ENV GOOS=linux
-ENV GOARCH=amd64
-WORKDIR /go/src/github.com/yokoe/cloudrunexp
-COPY . .
-RUN go build main.go
+RUN apk update && apk add git
 
-# runtime image
-FROM alpine
-COPY --from=builder /go/src/github.com/yokoe/cloudrunexp /app
+RUN mkdir /go/src/app
 
-CMD /app/main $PORT
+WORKDIR /go/src/app
+
+ADD . /go/src/app
