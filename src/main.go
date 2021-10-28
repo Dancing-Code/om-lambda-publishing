@@ -7,13 +7,17 @@ import (
     "strconv"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Entering Dungeon.\n")
-}
-
+/* 開始起点  */
 func main() {
-    port, _ := strconv.Atoi(os.Args[1])
-    fmt.Printf("Starting server at Port %d", port)
-    http.HandleFunc("/", handler)
-    http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+    mux := http.NewServeMux()
+    files := http.FileServer(http.Dir("/public"))
+    mux.Handle("/static/", http.StripPrefix("/static/", files))
+    mux.HandleFunc("/", index)
+
+    server := &http.Server{
+        Addr: "0.0.0.0:8080",
+        Handler: mux,
+    }
+
+    server.ListenAndServe()
 }
