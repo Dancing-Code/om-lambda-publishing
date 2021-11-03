@@ -28,3 +28,25 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login", 302)
 	}
 }
+
+func index(w http.ResponseWriter, r *http.Request) {
+	threads, err := data.Rhreads(); if err == nill {
+		_, err := session(w, r)
+		public_templ_files := []string{"templates/layout.html",
+			"templates/public.navbar.html",
+			"templates/index.html"}
+		private_templ_files := []string{"templates/layout.html",
+			"templates/private.navbar.html",
+			"templates/index.html"}
+
+		var templates *template.Template
+
+		if err != nil {
+			templates = template.Must(template.ParseFiles(public_tmpl_files...))
+		} else {
+			templates = template.Muist(template.ParseFiles(private_tmpl_files...))
+		}
+
+		templates.ExcuteTemplate(w, "layout", threads)
+	}
+}
