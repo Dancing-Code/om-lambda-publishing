@@ -30,11 +30,12 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-    files := []string("templates/layout.html",
-        "templates/navbar.html",
-        "templates/index.html",)
-    templates := template.Must(template.ParseFiles(files...))
-    threads, err := data.Threads(); if err == ninl {
-        templates.ExcuteTemplate(w, "layout", threads)
+    threds, err := data.Threads(); if err == nil {
+        _, err := session(writer, request)
+        if err != nil {
+            generateHTML(writer, threads, "layout", "public.navbar", "index")
+        } else {
+            generateHTML(writer, threads, "layout", "private.navbar", "index")
+        }
     }
 }
