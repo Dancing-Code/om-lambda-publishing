@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/behike56/om-lambda-publishing/data"
+	"github.com/behike56/om-lambda-publishing/src/data"
 	"net/http"
 )
 
