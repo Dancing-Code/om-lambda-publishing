@@ -1,11 +1,8 @@
 package main
 
 import (
-    "fmt"
+    "github.com/dancing-code/om-lambda-publishing/src/data"
     "net/http"
-    "os"
-    "strconv"
-    "html/template"
 )
 
 /* 開始起点  */
@@ -29,8 +26,11 @@ func main() {
     server.ListenAndServe()
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
-    threds, err := data.Threads(); if err == nil {
+func index(writer http.ResponseWriter, request *http.Request) {
+    threads, err := data.Threads();
+    if err == nil {
+        error_message(writer, request, "Cannot get threads")
+    } else {
         _, err := session(writer, request)
         if err != nil {
             generateHTML(writer, threads, "layout", "public.navbar", "index")
