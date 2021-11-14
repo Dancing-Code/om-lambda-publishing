@@ -1,0 +1,19 @@
+{{ define "content"  }}
+<p class="lead">
+　　<a href="/thread/new">スレッドを開始または参加</a>
+</p>
+
+{{ range . }}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span class="lead"><i class="fa fa-comment-o"></i> {{ .Topic }} </span>
+  </div>
+  <div class="panel-body">
+    　作者 {{ .User.Name  }} - 開始日 {{ .CreatedAtDate }} - 投稿数 {{ .NumReplies }}。
+    <div class="pull-right">
+      <a href="/thread/read?id={{ .Uuid }}">続けて読む</a>
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ end }}
