@@ -1,4 +1,4 @@
-name: GA to GCR
+name: CI to GCR
 on:
   push:
     branches:
@@ -6,11 +6,11 @@ on:
 
 name: Deploy to the GCR
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
-  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-  SERVICE: ${{ secrets }} #example-app
-  REGION: ${{ secrets  }} #asia-northeast1
-  IMAGE: gcr.io/${{ secrets.GCP_PROJECT }}/example-app:${{ github.sha }}
+  PROJECT_ID: ${{ secrets.OM_LP_PROJECT }}
+  GCP_SA_KEY: ${{ secrets.OM_LP_GCP_SA_KEY }}
+  SERVICE: ${{ env.SERVICE_NAME }} #exampl
+  REGION: ${{ env.REGION_NAME }} #asia-northeast1
+  IMAGE: gcr.io/${{ secrets.OM_LP_PROJECT }}/example-app:${{ github.sha }}
 
 jobs:
   deploy:
