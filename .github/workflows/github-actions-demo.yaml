@@ -1,6 +1,6 @@
 name: CI to GCR
 on:
-  push:
+  merge:
     branches:
       - main
 
@@ -10,7 +10,7 @@ env:
   GCP_SA_KEY: ${{ secrets.OM_LP_GCP_SA_KEY }}
   SERVICE: ${{ env.SERVICE_NAME }} #exampl
   REGION: ${{ env.REGION_NAME }} #asia-northeast1
-  IMAGE: gcr.io/${{ secrets.OM_LP_PROJECT }}/example-app:${{ github.sha }}
+  IMAGE: gcr.io/${{ secrets.OM_LP_PROJECT }}/om-lambda-publishing:${{ github.sha }}
 
 jobs:
   deploy:
