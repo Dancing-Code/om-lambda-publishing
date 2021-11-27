@@ -1,8 +1,9 @@
 name: CI to GCR
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types: [closed]
 
 name: Deploy to the GCR
 env:
