@@ -1,6 +1,6 @@
 name: CI to GCR
 on:
-  merge:
+  push:
     branches:
       - main
 
