@@ -1,13 +1,12 @@
 name: Deploy
-
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-  PORT: ${{ secrets.PORT }}
+  PORT: ${{ secrets.CONTAINER_PORT }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCP_REGION }}
   IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
