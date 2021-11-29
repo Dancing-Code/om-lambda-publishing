@@ -1,9 +1,6 @@
 name: Deploy
 
-on:
-  pull_request:
-    branches:
-      - main
+on:[push]
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
