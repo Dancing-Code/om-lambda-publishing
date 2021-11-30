@@ -7,7 +7,7 @@ env:
   PORT: ${{ secrets.CONTAINER_PORT }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCP_REGION }}
-  IMAGE: us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing
+  IMAGE: us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing:${{ github.sha  }}
 #asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
 # us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing
 jobs:
