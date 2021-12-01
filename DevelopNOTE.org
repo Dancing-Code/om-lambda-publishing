@@ -1,0 +1,92 @@
+#+TITLE: Gcrアプリケーション
+#+DESCRIPTION: Google Cloud Runを利用したアプリケーションの構築方法
+
+* 使用するプラットフォームとツール
+** Local-develop
+*** Git
+*** Docker
+*** Google Cloud SDK :GCP:
+*** GCloud CLI :GCP:
+*** SSH
+*** Emacs
+
+** Repogitory
+*** Github
+*** Github Actions
+*** workdflow
+
+** Cloud
+*** IAM :gcp:
+*** Cloud Run :GCP:
+*** Artifact Registry :GCP:
+
+* レポジトリからクラウドまでのCIの流れ
+1. mainブランチへのpushをトリガーにGitHub Actionsが発火
+2. リポジトリをチェックアウト
+3. Google Cloud SDKをセットアップ
+4. DockerイメージをBuild
+5. Google Container Registryにイメージをpush
+6. Cloud Runにデプロイ
+
+* Localでの設定
+** 開発
+- Dokcerを使用してアプリを開発
+- GitでレポジトリにPush
+** gcloud
+=必要な設定=
+gcloudで直接GCPの設定ができる。
+
+* CI
+1. GCPプロジェクトを作成。
+2. Cloud Run APIを有効にする。
+3. Cloud Runサービスアカウントを作成する。
+4. Cloud Runサービスアカウントに、CloudIAMロールを追加する。
+   1) Cloud Run Admin: 新しいCloudRunサービスの作成が可能。
+   2) Service Account User: Cloud Run asserviceアカウントにデプロイする。(required to deploy to Cloud Run as service account)
+   3) Storage Admin: Container Registry/Artifact Registryにプッシュを可能にする。
+5. サービスアカウントのJSONサービスアカウントキーをダウンロードする。
+6. Githubのレポジトリにレポジトリシークレットを設定する
+   1) GCP_PROJECT: GCP project ID
+   2) GCP SA KEY: ダウンロードしたKEY
+
+** GCP settings
+- Cloud RUN APIを有効にする。
+- Cloud Runのサービスアカウントを作成する。
+- IAMのロールを上記のサービスアカウントに設定する。
+
+** Github
+- ソースコードを管理
+- Masterブランチにプルリク
+*** Actionsで使うSecretsを設定する。
+- GCP_PROJECT (GCPプロジェクトID)
+- GCP_REGION (リージョン)
+- GCP_SA_EMAIL (サービスアカウント メールアドレス)
+- GCP_SA_KEY (サービスアカウントキー)
+*** SecretsはSettingsのSecretsから設定する。
+*** envはSettingsのEnvironmentsから設定する。
+
+** Github Actions
+- WorkFlowに基づいて起動する
+- GCP公式のActionsがある。
+*** Cloud Runのワークフロー
+
+
+* GCP
+** Artfact Registry
+- =最初のみ手動でコンテナイメージをデプロイする必要がある。=
+
+** Cloud Run Api
+- 有効にする。
+
+** IAM
+必要なロールを設定する。[[https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration][GCP-CloudRun]]
+*** Cloud Run 管理者
+*** Cloud Run サービス エージェント
+*** Cloud Build サービス アカウント
+*** Githuv Actions用のサービスアカウントを発行する
+- iam.serviceAccounts.actAs
+- storage.buckets.get
+- storage.objects.create
+
+
+* 開発環境の構築
