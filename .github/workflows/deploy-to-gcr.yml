@@ -1,6 +1,6 @@
 name: Deploy
 
-on: [push]
+on: [merge]
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
