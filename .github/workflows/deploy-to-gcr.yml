@@ -1,14 +1,15 @@
 name: Deploy
 
-on: [push]
+on: [merge]
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   PORT: ${{ secrets.CONTAINER_PORT }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCP_REGION }}
-  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
-
+  IMAGE: us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing:${{ github.sha }}
+#asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+# us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing
 jobs:
   deploy-to-cloud-run:
     runs-on: ubuntu-latest
@@ -17,10 +18,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup gcloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@master
         with:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_email: $ {{ secrets.GCP_SA_EMAIL  }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
