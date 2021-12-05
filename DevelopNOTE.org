@@ -47,11 +47,16 @@ gcloudで直接GCPの設定ができる。
 ** Buildpacksでコンテナ化する方法
 1. Dokcerが必要
 2. buildpacksのCLIが必要（shellでインストールが良い？）
-3. packしたいディレクトリでコマンドを打つ。
+3. ディレクトリ： 「dancing-code/om-lambda-publishing/app/アプリケーション本体」
+   このリポジトリだと、om-lambda-publishing/app配下に、go.modとmain()をもつgoファイルが必要。
+   appに移動してからpackコマンドを打つ。
    #+BEGIN_VERSE pack
-   cd sample-go
-   pack build --builder gcr.io/buildpacks/builder:v1 sample-go
+   cd app
+   pack build --builder gcr.io/buildpacks/builder:v1 app
    #+END_VERSE
+4. imageができたことを確認
+   docker ps -a
+5.
 
 ** 手動でデプロイする方法
 1. gcloud configを確認する
