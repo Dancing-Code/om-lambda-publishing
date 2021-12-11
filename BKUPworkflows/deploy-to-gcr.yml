@@ -1,0 +1,53 @@
+name: deploy-to-gcr
+
+on: [merge]
+
+env:
+  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+  PORT: ${{ secrets.CONTAINER_PORT }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_REGION: ${{ secrets.GCP_REGION }}
+  IMAGE: us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing:${{ github.sha }}
+#asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+# us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing
+jobs:
+  deploy-to-cloud-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: 'latest'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_email: $ {{ secrets.GCP_SA_EMAIL  }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+           # gcloud alpha builds submit --pack image=gcr.io/[project-id]/node
+    #- name: Configure docker to use the gcloud cli
+    #  run: gcloud auth configure-docker --quiet
+
+    # - name: Build a docker image
+    #   run: docker build -t $IMAGE .
+
+    # - name: Push the docker image to Container Registry
+    #   run: docker push $IMAGE
+
+        #gcloud run deploy --image=gcr.io/[project-id]/node --platform managed
+        #
+        - name: build & deploy to GCR
+          run: gcloud beta run deploy --source .
+
+     # - name: Deploy to Cloud Run
+        run: |
+            gcloud run deploy $SERVICE_NAME \
+              --image $IMAGE \
+              --port $PORT \
+              --project $GCP_PROJECT_ID \
+              --region $GCP_REGION \
+              --platform=managed \
+              --allow-unauthenticated \
+              --quiet
