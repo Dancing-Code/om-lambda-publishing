@@ -1,7 +1,7 @@
 name: deploy-to-gcr
 
 on:
-  merge:
+  push:
     branches:
       - 'master'
 
