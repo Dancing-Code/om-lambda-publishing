@@ -13,7 +13,7 @@ env:
   IMAGE: us-west1-docker.pkg.dev/long-axle-323211/om-lambda-publishing:${{ github.sha }}
 
 jobs:
-  deploy-to-cloud-run:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the repository
