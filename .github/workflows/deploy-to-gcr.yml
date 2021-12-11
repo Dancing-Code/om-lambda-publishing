@@ -1,6 +1,9 @@
 name: deploy-to-gcr
 
-on: [merge]
+on:
+  merge:
+    branches:
+      - master
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
