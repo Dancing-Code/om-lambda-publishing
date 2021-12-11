@@ -3,7 +3,7 @@ name: deploy-to-gcr
 on:
   merge:
     branches:
-      - master
+      - 'master'
 
       name: Build and Deploy to Cloud Run
 env:
