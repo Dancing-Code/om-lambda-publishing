@@ -47,11 +47,15 @@ gcloudで直接GCPの設定ができる。
 ** Buildpacksでコンテナ化する方法
 1. Dokcerが必要
 2. buildpacksのCLIが必要（shellでインストールが良い？）
-3. packしたいディレクトリでコマンドを打つ。
+3. ディレクトリ： 「dancing-code/om-lambda-publishing/app/アプリケーション本体」
+   このリポジトリだと、om-lambda-publishing/app配下に、go.modとmain()をもつgoファイルが必要。
+   appに移動してからpackコマンドを打つ。
    #+BEGIN_VERSE pack
-   cd sample-go
-   pack build --builder gcr.io/buildpacks/builder:v1 sample-go
+   cd app
+   pack build --builder gcr.io/buildpacks/builder:v1 app
    #+END_VERSE
+4. imageができたことを確認
+   docker ps -a
 
 ** 手動でデプロイする方法
 1. gcloud configを確認する
@@ -71,9 +75,25 @@ gcloudで直接GCPの設定ができる。
 3. Docker Build時のタグを設定する
    docker build -t [ホストする場所]/[project id]/[app]:latest . :LOCAL:
 
-4.
+   buildpacksでイメージを作成した場合はdocker buildは不要なのでtagコマンドでタグ付けする。
+   docker tag [イメージ名] [ホストする場所]/[project id]/om-lambda-publishing/app
+
+4. docker push でArtifactRegistryにpushする。
+   docker push [ホストする場所]/[project id]/om-lambda-publishing/app
+
+   gcloud beta run deploy --source=[DIRECTORY]
+
+   gcloud beta run deploy --source=[DIRECTORY]
+
+   pack build gcr.io/long-axle-323211/github.com/dancing-code/om-lambda-publishing:$COMMIT_SHA \
+    --builder gcr.io/buildpacks/builder
 
 * CI
+- =最初のみ手動でコンテナイメージをデプロイする必要がある。=
+Artifact Registryに最初のコンテナイメージのpushが合わった後。
+Cloud RunをArtifact　Registryをもとに作成する。
+その後はWorkflowの通りにCIできる。
+
 1. GCPプロジェクトを作成。
 2. Cloud Run APIを有効にする。
 3. Cloud Runサービスアカウントを作成する。
@@ -110,7 +130,6 @@ gcloudで直接GCPの設定ができる。
 
 * GCP: 本番環境
 ** Artfact Registry
-- =最初のみ手動でコンテナイメージをデプロイする必要がある。=
 - Go言語（限定？）では「ko」というツールでDockerなし、Dockerfileの自作なしにコンテナイメージを作れる、らしい。
 - buildpackというサービスもある、らしい。
 - 自力なら当然、DockerとDockerfileに対する理解が必要。 [[https://github.com/GoogleCloudPlatform/buildpacks][Google Cloud Buildpacks]]

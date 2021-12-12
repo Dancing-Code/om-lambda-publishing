@@ -1,3 +1,3 @@
-module github.com/dancing-code/om-lambda-publishing
+module github.com/om-lambda-publishing/app
 
 go 1.17
