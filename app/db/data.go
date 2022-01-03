@@ -1,24 +1,23 @@
-package data
+package db
 
 import (
 	"crypto/rand"
 	"crypto/sha1"
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"log"
 )
 
 var Db *sql.DB
 
-func init() {
-	var err error
-	Db, err = sql.Open("postgres", "dbname=chitchat sslmode=disable")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
-}
+// func init() {
+// 	var err error
+// 	Db, err = sql.Open("postgres", "dbname=chitchat sslmode=disable")
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	return
+// }
 
 // create a random UUID with from RFC 4122
 // adapted from http://github.com/nu7hatch/gouuid

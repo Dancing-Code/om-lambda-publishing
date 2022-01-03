@@ -27,10 +27,8 @@ func main() {
 	mux.HandleFunc("/", topPage)
 
 	server := &http.Server{
-		Addr:           "0.0.0.0:5050",
+		Addr:           "0.0.0.0:8080",
 		Handler:        mux,
-		ReadTimeout:    60,
-		WriteTimeout:   60,
 		MaxHeaderBytes: 1 << 20,
 	}
 
