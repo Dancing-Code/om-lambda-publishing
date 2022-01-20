@@ -15,10 +15,17 @@
 package main
 
 import (
+	"github.com/bloom42/rz-go"
+	"github.com/bloom42/rz-go/log"
 	"net/http"
 )
 
 func main() {
+	// Logging開始
+	initLogger()
+
+	log.Info("info from logger")
+
 	mux := http.NewServeMux()
 
 	files := http.FileServer(http.Dir("pages/styles"))
@@ -34,6 +41,9 @@ func main() {
 
 	server.ListenAndServe()
 
+    /*
+    サーバーレス用
+    */
 	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	// fmt.Fprint(w, "Cloud Build Testing. Lambda Publishing LTD.")
 	//})
