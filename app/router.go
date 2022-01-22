@@ -13,6 +13,6 @@ func topPage(writer http.ResponseWriter, request *http.Request) {
 	//threads, err := db.Threads()
 
 	//if err != nil {
-	generateHTML(writer, nil, "layout", "header", "index", "footer")
+	generateHTML(writer, nil, "layout", "header", "content", "footer")
 	//}
 }

@@ -15,7 +15,6 @@
 package main
 
 import (
-	"github.com/bloom42/rz-go"
 	"github.com/bloom42/rz-go/log"
 	"net/http"
 )
@@ -24,12 +23,12 @@ func main() {
 	// Logging開始
 	initLogger()
 
-	log.Info("info from logger")
+	log.Info("server started.")
 
 	mux := http.NewServeMux()
 
-	files := http.FileServer(http.Dir("pages/styles"))
-	mux.Handle("/static/", http.StripPrefix("/static/", files))
+	// files := http.FileServer(http.Dir("pages/styles"))
+	// mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	mux.HandleFunc("/", topPage)
 
@@ -41,9 +40,9 @@ func main() {
 
 	server.ListenAndServe()
 
-    /*
-    サーバーレス用
-    */
+	/*
+	   サーバーレス用
+	*/
 	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	// fmt.Fprint(w, "Cloud Build Testing. Lambda Publishing LTD.")
 	//})
