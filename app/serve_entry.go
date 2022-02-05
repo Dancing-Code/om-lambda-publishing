@@ -27,8 +27,8 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// files := http.FileServer(http.Dir("pages/styles"))
-	// mux.Handle("/static/", http.StripPrefix("/static/", files))
+	files := http.FileServer(http.Dir("pages"))
+	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	mux.HandleFunc("/", topPage)
 
