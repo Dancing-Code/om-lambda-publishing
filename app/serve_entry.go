@@ -22,9 +22,9 @@ func main() {
 	mux.HandleFunc("/disclaimer", disclaimer)
 	mux.HandleFunc("/contact", contact)
 
-    /*
-        開発用
-    */
+	/*
+	   開発用
+	*/
 	// 	server := &http.Server{
 	// 		Addr:           "0.0.0.0:8080",
 	// 		Handler:        mux,
@@ -38,11 +38,14 @@ func main() {
 	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	// fmt.Fprint(w, "Cloud Build Testing. Lambda Publishing LTD.")
 	//})
-	 port := os.Getenv("PORT")
-	 if port == "" {
-	 	port = "8080"
-	 }
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	// log.Printf("Handling HTTP requests on %s.", port)
-	// log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+	http.ListenAndServe(port, mux)
+
+	//log.Printf("Handling HTTP requests on %s.", port)
+	//log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+
 }
