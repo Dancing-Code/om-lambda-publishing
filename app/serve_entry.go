@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/bloom42/rz-go/log"
 	"net/http"
 	"os"
