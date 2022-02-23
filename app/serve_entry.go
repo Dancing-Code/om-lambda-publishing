@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/bloom42/rz-go/log"
+	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/bloom42/rz-go/log"
 )
 
 func main() {
@@ -45,13 +47,8 @@ func main() {
 		port = "8080"
 	}
 
-	server := &http.Server{
-		Addr:           port,
-		Handler:        mux,
-		MaxHeaderBytes: 1 << 20,
-	}
-
-	server.ListenAndServe()
+	//	server.ListenAndServe()
+	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 
 	//log.Printf("Handling HTTP requests on %s.", port)
 	//log.Fatal\\(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
