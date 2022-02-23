@@ -48,7 +48,7 @@ func main() {
 	}
 
 	//	server.ListenAndServe()
-	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), mux)
 
 	//log.Printf("Handling HTTP requests on %s.", port)
 	//log.Fatal\\(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
