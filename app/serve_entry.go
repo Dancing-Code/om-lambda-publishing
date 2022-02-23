@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/bloom42/rz-go/log"
 	"net/http"
+	"os"
 )
 
 func main() {
