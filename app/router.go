@@ -18,21 +18,22 @@ func topPage(writer http.ResponseWriter, request *http.Request) {
 }
 
 func corpInfo(writer http.ResponseWriter, request *http.Request) {
-    log.Info("Entering Lexical corp info page.")
-    generateBaseHTML(writer, nil, "layout", "header", "lexical-corp-info", "footer")
+	log.Info("Entering Lexical corp info page.")
+	generateBaseHTML(writer, nil, "layout", "header", "lexical-corp-info", "footer")
 }
 
 func disclaimer(writer http.ResponseWriter, request *http.Request) {
-    log.Info("Entering Disclaimer page.")
-    generateBaseHTML(writer, nil, "layout", "header", "disclaimer", "footer")
+	log.Info("Entering Disclaimer page.")
+	generateBaseHTML(writer, nil, "layout", "header", "disclaimer", "footer")
 }
 
 func contact(writer http.ResponseWriter, request *http.Request) {
-    log.Info("Entering Contact page.")
-    generateBaseHTML(writer, nil, "layout", "header", "contact", "footer")
+	log.Info("Entering Contact page.")
+	generateBaseHTML(writer, nil, "layout", "header", "contact", "footer")
 }
 
 func contents1(writer http.ResponseWriter, request *http.Request) {
-    log.Info("Entering Contents page.")
-    generateContentsHTML(writer, nil, "layout", "header", "top1", "footer")
+	log.Info("Entering Contents page.")
+	generateBaseHTML(writer, nil, "layout", "header", "footer")
+	generateContentsHTML(writer, nil, "top_one")
 }
