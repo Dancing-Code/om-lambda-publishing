@@ -34,6 +34,5 @@ func contact(writer http.ResponseWriter, request *http.Request) {
 
 func contents1(writer http.ResponseWriter, request *http.Request) {
 	log.Info("Entering Contents page.")
-	generateBaseHTML(writer, nil, "layout", "header", "footer")
-	generateContentsHTML(writer, nil, "top_one")
+	generateBaseHTML(writer, nil, "layout", "header", "top_one", "footer")
 }
