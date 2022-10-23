@@ -13,21 +13,26 @@ func topPage(writer http.ResponseWriter, request *http.Request) {
 	//threads, err := db.Threads()
 
 	//if err != nil {
-	generateHTML(writer, nil, "layout", "header", "content", "footer")
+	generateBaseHTML(writer, nil, "layout", "header", "content", "footer")
 	//}
 }
 
 func corpInfo(writer http.ResponseWriter, request *http.Request) {
     log.Info("Entering Lexical corp info page.")
-    generateHTML(writer, nil, "layout", "header", "lexical-corp-info", "footer")
+    generateBaseHTML(writer, nil, "layout", "header", "lexical-corp-info", "footer")
 }
 
 func disclaimer(writer http.ResponseWriter, request *http.Request) {
     log.Info("Entering Disclaimer page.")
-    generateHTML(writer, nil, "layout", "header", "disclaimer", "footer")
+    generateBaseHTML(writer, nil, "layout", "header", "disclaimer", "footer")
 }
 
 func contact(writer http.ResponseWriter, request *http.Request) {
     log.Info("Entering Contact page.")
-    generateHTML(writer, nil, "layout", "header", "contact", "footer")
+    generateBaseHTML(writer, nil, "layout", "header", "contact", "footer")
+}
+
+func contents1(writer http.ResponseWriter, request *http.Request) {
+    log.Info("Entering Contents page.")
+    generateContentsHTML(writer, nil, "layout", "header", "top1", "footer")
 }

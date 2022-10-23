@@ -12,7 +12,7 @@ func main() {
 	// Logging開始
 	initLogger()
 
-	log.Info("Server Initiatializing......")
+	log.Info("Server Initialising......")
 
 	mux := http.NewServeMux()
 
@@ -23,6 +23,7 @@ func main() {
 	mux.HandleFunc("/lexical-corp-info", corpInfo)
 	mux.HandleFunc("/disclaimer", disclaimer)
 	mux.HandleFunc("/contact", contact)
+	mux.HandleFunc("/contents/top1", contents1)
 
 	/*
 	   開発用
