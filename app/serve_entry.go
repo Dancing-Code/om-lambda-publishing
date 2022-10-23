@@ -23,7 +23,7 @@ func main() {
 	mux.HandleFunc("/lexical-corp-info", corpInfo)
 	mux.HandleFunc("/disclaimer", disclaimer)
 	mux.HandleFunc("/contact", contact)
-	mux.HandleFunc("/contents/top_one", contents1)
+	mux.HandleFunc("/contents/top_one", topOne)
 
 	/*
 	   開発用

@@ -32,7 +32,7 @@ func contact(writer http.ResponseWriter, request *http.Request) {
 	generateBaseHTML(writer, nil, "layout", "header", "contact", "footer")
 }
 
-func contents1(writer http.ResponseWriter, request *http.Request) {
+func topOne(writer http.ResponseWriter, request *http.Request) {
 	log.Info("Entering Contents page.")
-	generateBaseHTML(writer, nil, "layout", "header", "top_one", "footer")
+	generateContentsHTML(writer, nil, "templates/layout", "templates/header", "contents/top_one", "templates/footer")
 }

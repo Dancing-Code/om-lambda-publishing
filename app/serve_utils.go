@@ -27,11 +27,7 @@ func generateContentsHTML(writer http.ResponseWriter, data interface{}, filename
 	var files []string
 
 	for _, file := range filenames {
-		files = append(files, fmt.Sprintf("pages/templates/%s.html", file))
-	}
-
-	for _, file := range filenames {
-		files = append(files, fmt.Sprintf("pages/contents/%s.html", file))
+		files = append(files, fmt.Sprintf("pages/%s.html", file))
 	}
 
 	templates := template.Must(template.ParseFiles(files...))
